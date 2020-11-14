@@ -279,7 +279,8 @@ function action(mode, type, selection) {
 		*/
 		var status = 0; 
 var beauty = 0; 
-var haircolor = Array(); 
+var haircolor = Array();
+haircolor.push(30000);
 var skin = [0, 1, 2, 3, 4, 5, 9, 10]; 
 var fhair= [31000, 31010, 31020, 31030, 31040, 31050, 31060, 31070, 31080, 31090, 31100, 31110, 31120, 31130, 31140, 31150, 31160, 31170, 31180, 31190, 31200, 31210, 31220, 31230, 31240];
 var hair = [30000, 30020, 30030, 30040, 30050, 30060, 30070, 30090, 30100, 30110, 30120, 30130, 30140, 30150, 30160, 30170, 30180, 30190, 30200, 30210, 30220, 30230, 30240, 30250, 30260];
@@ -294,7 +295,7 @@ var facenew = Array();
 var colors = Array(); 
 
 function start() { 
-    cm.sendSimple("Hey #h #! I am one of two of the best #e Hair Stylist#n NPCs of MapleOrigin ! Which of the category would you like to change?\r\n#L0#Skin#l\r\n\r\n#L1##bMale#k Hair#l                          \r\n#L3##bMale#k Eye#l                           \r\n\r\n#L2#Hair Colour#l                       \r\n#L4#Eye Colour#l\r\n"); 
+    cm.sendSimple("Hey #h #! I am one of two of the best #e Hair Stylist#n NPCs of MapleOrigin ! Which of the category would you like to change?\r\n#L0#Skin#l\r\n\r\n#L1##bMale#k Hair#l                          \r\n#L3##bMale#k Eye#l                           \r\n\r\n#L2#Hair Colour[Starts with different hair]#l                       \r\n#L4#Eye Colour#l\r\n"); 
 } 
 
 function action(mode, type, selection) { 
