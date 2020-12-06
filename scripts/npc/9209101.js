@@ -139,6 +139,7 @@ function action(mode, type, selection) {
                     var item = vegas[i];
 
                     shopStr += "#L" + (i+1) + "##n#k Buy #r" + (item.quantity || 1) + " #b#e#z" + item.id + "##n#k (#r" + item.cost + " GML)#l\r\n";
+					//shopStr += "#L" + (i+1) + "##n#k Buy #r" + (item.quantity || 10) + " #b#e#z" + item.id + "##n#k (#r" + (item.cost || 10) + " GML)#l\r\n";
                 }
             }
             cm.sendSimple(shopStr);
