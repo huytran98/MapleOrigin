@@ -14,7 +14,7 @@
         <int name="eva" value="50"/>
         <int name="pushed" value="3500"/>
         <float name="fs" value="10.0"/>
-        <int name="exp" value="112812"/>
+        <int name="exp" value="125000"/>
         <int name="boss" value="1"/>
     </imgdir>
     <imgdir name="stand">

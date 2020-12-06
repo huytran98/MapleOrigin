@@ -27,7 +27,7 @@
         <int name="eva" value="95"/>
         <int name="pushed" value="2000"/>
         <float name="fs" value="10.0"/>
-        <int name="exp" value="418066"/>
+        <int name="exp" value="625000"/>
         <int name="category" value="8"/>
         <string name="mobType" value="1N"/>
         <int name="boss" value="1"/>

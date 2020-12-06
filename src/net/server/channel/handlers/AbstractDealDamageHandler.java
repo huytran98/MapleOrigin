@@ -506,7 +506,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                         List<Pair<Integer, Integer>> mobSkills = monster.getSkills();
 
                         for (Pair<Integer, Integer> ms : mobSkills) {
-                            if (ms.left == 145) {
+                            if (ms.left == 145 && theSkill.getId() != Marauder.ENERGY_CHARGE) {
                                 MobSkill toUse = MobSkillFactory.getMobSkill(ms.left, ms.right);
                                 player.addHP(-toUse.getX());
                                 map.broadcastMessage(player, MaplePacketCreator.damagePlayer(0, monster.getId(), player.getId(), toUse.getX(), 0, 0, false, 0, true, monster.getObjectId(), 0, 0), true);
@@ -677,7 +677,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
             double tma = chr.getTotalMagic();
             double intStat = chr.getTotalInt();
             calcDmgMax = (((tma * tma / 1000.0) + tma) / 30.0 + intStat / 200.0) * elem;
-        } else if (ret.skill == 4001344 || ret.skill == NightWalker.LUCKY_SEVEN || ret.skill == NightLord.TRIPLE_THROW) {
+        } else if (ret.skill == 4001344 || ret.skill == NightWalker.LUCKY_SEVEN || ret.skill == NightLord.TRIPLE_THROW || ret.skill == NightWalker.TRIPLE_THROW) {
             calcDmgMax = chr.getTotalLuk() * 5.0 * chr.getTotalWatk() / 100.0;
         } else if (ret.skill == DragonKnight.DRAGON_ROAR) {
             calcDmgMax = (chr.getTotalStr() * 4.0 + chr.getTotalDex()) * chr.getTotalWatk() / 100.0;
@@ -904,7 +904,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                         } else if (monster.getStats().getEffectiveness(Element.LIGHTING) == ElementalEffectiveness.STRONG) {
                             monsterSpecificDmgMult *= 0.95 - wkChargeLevel * 0.015;
                         }
-                    } else if (wkChargeId == Paladin.BW_HOLY_CHARGE || wkChargeId == Paladin.SWORD_HOLY_CHARGE) {
+                    } else if (wkChargeId == Paladin.BW_HOLY_CHARGE || wkChargeId == Paladin.SWORD_HOLY_CHARGE || wkChargeId == DawnWarrior.SOUL_CHARGE) {
                         if (monster.getStats().getEffectiveness(Element.HOLY) == ElementalEffectiveness.WEAK) {
                             monsterSpecificDmgMult *= 1.20 + wkChargeLevel * 0.015;
                         } else if (monster.getStats().getEffectiveness(Element.HOLY) == ElementalEffectiveness.STRONG) {
@@ -926,7 +926,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
 
             if (ret.skill != 0) {
                 Skill skill = SkillFactory.getSkill(ret.skill);
-                if (skill.getElement() != Element.NEUTRAL && chr.getBuffedValue(MapleBuffStat.ELEMENTAL_RESET) == null && chr.getBuffEffect(MapleBuffStat.WK_CHARGE) == null) {
+                if (chr.getBuffedValue(MapleBuffStat.ELEMENTAL_RESET) == null) {
                     // The skill has an element effect, so we need to factor that in.
                     if (monster != null) {
                         ElementalEffectiveness eff = monster.getElementalEffectiveness(skill.getElement());
@@ -982,7 +982,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                         hitDmg *= Math.pow(2, (j - 3));
                 }
                 if (ret.skill == Shadower.ASSASSINATE && ret.numDamage == 1) { // 4th nate hit. Formula is still unknown but this slight over estimation still works well
-                    MapleStatEffect nateEffect = SkillFactory.getSkill(Shadower.ASSASSINATE).getEffect(chr.getMasterLevel(Shadower.ASSASSINATE));
+                    MapleStatEffect nateEffect = SkillFactory.getSkill(ret.skill).getEffect(chr.getSkillLevel(ret.skill));
                     hitDmg = chr.getDarkSightCharge() * chr.calculateMaxBaseDamage(chr.getTotalWatk()) *
                             ((canCrit ? chr.getBuffEffect(MapleBuffStat.SHARP_EYES).getY() : 0) +
                                     nateEffect.getDamage() + nateEffect.getCriticalDamage() - 100.0) / 100.0;
@@ -991,7 +991,16 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                     // For shadow partner, the second half of the hits only do 50% damage. So calc that
                     // in for the crit effects.
                     if (j >= ret.numDamage / 2) {
-                        hitDmg *= ret.skill == 0 ? 0.8 : 0.5;
+                        double shadowMult = 0.8;
+                        if (ret.skill != 0) {
+                            int spSkillId = -1;
+                            if (chr.getJob().isA(MapleJob.NIGHTWALKER3))
+                                spSkillId = NightWalker.SHADOW_PARTNER;
+                            else
+                                spSkillId = Hermit.SHADOW_PARTNER;
+                            shadowMult = SkillFactory.getSkill(spSkillId).getEffect(chr.getSkillLevel(spSkillId)).getY() / 100.0;
+                        }
+                        hitDmg *= shadowMult;
                     }
                 }
 
@@ -1001,14 +1010,19 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
 
                 boolean skipBan = false;
                 if (monster != null) {
+                    MonsterStatusEffect matkBuff = monster.getStati(MonsterStatus.MAGIC_ATTACK_UP);
+                    if (matkBuff != null && matkBuff.getMobSkill() != null && (matkBuff.getMobSkill().getSkillId() == 111 ||
+                             matkBuff.getMobSkill().getSkillId() == 101 || matkBuff.getMobSkill().getSkillId() == 151)) { // mob skills for magic attack buffs magic attack by x but increases damage taken from neutral by x
+                        hitDmg *= matkBuff.getMobSkill().getX() / 100.0;
+                        skipBan = true; // TODO: this doesnt really work atm.. if the buff is still active on the client side due to lag this flag stays false
+                    }
+
                     if (monster.isTempestFreeze()) {
                         hitDmg = monster.getMaxHp();
                     }
 
-                    MonsterStatusEffect matkBuff = monster.getStati(MonsterStatus.MAGIC_ATTACK_UP);
-                    if (matkBuff != null && matkBuff.getMobSkill() != null && matkBuff.getMobSkill().getSkillId() == 111) { // mob skill 111 buffs magic attack by x but increases damage taken from physical by 1.3x
-                        hitDmg *= matkBuff.getMobSkill().getX() / 100.0;
-                        skipBan = true;
+                    if (monster.getStats().getFixedDamage() > 0) {
+                        hitDmg = monster.getStats().getFixedDamage();
                     }
                 }
 

@@ -86,22 +86,40 @@ public class MapleTrade {
         this.number = number;
     }
 
-    public static int getFee(long meso) {
-        long fee = 0;
+    public static int getFee(int meso) {
+        int fee = 0;
         if (meso >= 100000000) {
-            fee = (meso * 6) / 100;
+            fee = (int) Math.ceil(meso * 0.06);
         } else if (meso >= 25000000) {
-            fee = (meso * 5) / 100;
+            fee = (int) Math.ceil(meso * 0.05);
         } else if (meso >= 10000000) {
-            fee = (meso * 4) / 100;
+            fee = (int) Math.ceil(meso * 0.04);
         } else if (meso >= 5000000) {
-            fee = (meso * 3) / 100;
+            fee = (int) Math.ceil(meso * 0.03);
         } else if (meso >= 1000000) {
-            fee = (meso * 18) / 1000;
+            fee = (int) Math.ceil(meso * 0.018);
         } else if (meso >= 100000) {
-            fee = (meso * 8) / 1000;
+            fee = (int) Math.ceil(meso * 0.008);
         }
-        return (int) fee;
+        return fee;
+    }
+
+    public static int getMerchantFee(int meso) {
+        int fee = 0;
+        if (meso >= 100000000) {
+            fee = (int) Math.ceil(meso * 0.03);
+        } else if (meso >= 25000000) {
+            fee = (int) Math.ceil(meso * 0.025);
+        } else if (meso >= 10000000) {
+            fee = (int) Math.ceil(meso * 0.02);
+        } else if (meso >= 5000000) {
+            fee = (int) Math.ceil(meso * 0.015);
+        } else if (meso >= 1000000) {
+            fee = (int) Math.ceil(meso * 0.009);
+        } else if (meso >= 100000) {
+            fee = (int) Math.ceil(meso * 0.004);
+        }
+        return fee;
     }
 
     private void lockTrade() {

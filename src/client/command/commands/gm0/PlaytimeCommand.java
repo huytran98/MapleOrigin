@@ -20,7 +20,7 @@ public class PlaytimeCommand extends Command {
         long hours = minutes / 60L;
         long days = hours / 24L;
 
-        player.dropMessage(6, String.format("Playtime: %d days, %d hours, %d minutes", days % 24, hours % 24, minutes % 60));
+        player.dropMessage(6, String.format("Playtime: %d days, %d hours, %d minutes", days, hours % 24, minutes % 60));
         player.dropMessage(6, String.format("First Login: %d days ago", createdDay));
     }
 }

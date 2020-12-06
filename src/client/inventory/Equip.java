@@ -907,7 +907,7 @@ public class Equip extends Item {
         
         int reqLevel = ii.getEquipLevelReq(this.getItemId());
         
-        float masteryModifier = (float)(YamlConfig.config.server.EQUIP_EXP_RATE * ExpTable.getExpNeededForLevel(1)) / (float)normalizedMasteryExp(reqLevel);
+        float masteryModifier = (float)(YamlConfig.config.server.EQUIP_EXP_MODIFIER * ExpTable.getExpNeededForLevel(1)) / (float)normalizedMasteryExp(reqLevel);
         float elementModifier = (isElemental) ? 0.85f : 0.6f;
         
         float baseExpGain = gain * elementModifier * masteryModifier;

@@ -8,7 +8,7 @@ var beauty = 0;
 var mface = new Array(20022, 20023, 20024, 20025, 20026, 20027, 20028, 20029, 20030, 20031, 20032, 20033, 20034, 20035, 20036, 20037, 20038, 20039, 
 20040, 20041, 20042, 20043, 20044, 20045, 20046, 20047, 20048, 20049, 20050, 20051, 20052, 20053, 20054, 20055, 20056, 20057, 20058, 20059, 20060, 
 20061, 20062, 20063, 20064, 20065, 20066, 20067, 20068, 20069, 20070, 20071);
-var mface2 = new Array(20072, 20073, 20074, 20075, 20076, 20077, 20078, 20079, 20080, 20081, 20082, 20083, 20084, 20085, 20086, 20087, 20088, 20089, 
+var mface2 = new Array(20073, 20074, 20075, 20076, 20077, 20078, 20080, 20081, 20082, 20083, 20084, 20085, 20086, 20087, 20088, 20089, 
 20090, 20091, 20092, 20093, 20094, 20095, 20096, 20097, 20098, 20099, 23000, 23001, 23002, 23003, 23004, 23005, 23006, 23007, 23008, 23009, 23010, 
 23011, 23012, 23013, 23014, 23015, 23016, 23017, 23018, 23019, 23020, 23021);
 var mface3 = new Array(23022, 23023, 23024, 23025, 23026, 23027, 23028, 23029, 23030, 23031, 23032, 23034, 23035, 23036, 23037, 23038, 23039, 23041, 
@@ -44,7 +44,7 @@ var fface6 = new Array(28011, 28012, 28013, 28014, 28015, 28016, 28019, 28021, 2
 var fface7 = new Array(28070, 28071, 28072, 28073, 28074, 28075, 28076, 28078, 28079, 28080, 28081, 28082, 28083, 
 28084, 28085, 28086, 28087, 28089, 28090, 28091, 28092, 28093, 28094, 28095, 28096, 28097, 28099);
 
-var mhair = Array(33040, 33050, 33100, 33110, 33120, 33130, 33150, 33170, 33180, 33190, 33220, 33230, 33240, 33260, 33270, 33280, 33290, 33310, 
+var mhair = Array(33250,33040, 33050, 33100, 33110, 33120, 33130, 33150, 33170, 33180, 33190, 33220, 33230, 33240, 33260, 33270, 33280, 33290, 33310, 
 33320, 33330, 33340, 33350, 33360, 33380, 33390, 33410, 33440, 33450, 33460, 33470, 33510, 33530, 33540, 33550, 33580, 33600, 33630, 33640, 
 33660, 33690, 33700, 33740, 33750, 33760, 33770, 33780, 40030, 41070);
 var mhair2 = Array(33810, 33820, 33830, 33930, 33940, 33950, 33960, 33990, 35000, 35010, 35020, 35030, 35040, 35050, 35060, 35070, 35080, 35090, 
@@ -57,13 +57,12 @@ var mhair4 = Array(36430, 36440, 36450, 36460, 36470, 36480, 36490, 36500, 36510
 36630, 36640, 36670, 36680, 36690, 36700, 36710, 36750, 36760, 36780, 36790, 36800, 36840, 36880, 36900, 36920, 36940, 36950, 39000, 39260, 39310, 39320, 39330, 
 39340, 39350, 39360, 39370, 39380, 39390, 39400, 39410, 39420, 39430, 39440, 40020);
 var mhair5 = Array(33800, 40050, 40070, 40080, 40090, 40100, 40110, 40120, 40250, 40260, 40280, 40290, 40300, 40310, 40320, 40330, 40350, 40370, 
-40400, 40410, 40420, 40450, 40470, 40490, 40520, 40530, 40540, 40550, 40560, 40580, 40590, 40600, 40610, 40620, 40630, 40640, 40660, 40670, 
+40400, 40410, 40420, 40450, 40470, 40490, 40520, 40530, 40540, 40550, 40560, 40590, 40600, 40610, 40620, 40630, 40670, 
 40680, 40690, 40710, 40770, 40790, 40800, 40810, 40830, 40840, 40890, 40910, 40940, 41060);
 var mhair6 = Array(33790, 42060, 42080, 43150, 43160, 43170, 43180, 43190, 43200, 43220, 43230, 43240, 43250, 43260, 43270, 43280, 43310, 43340, 
-43350, 43410, 43420, 43440, 43450, 43570, 43590, 43600, 43610, 43730, 43760, 43770, 43780, 43800, 43820, 43830, 43850, 43900, 44130, 44140, 
-44150, 44180, 45040, 45100, 46030, 46040, 46080, 46090, 46100, 46140, 46150, 46180);
-var mhair7 = Array(35520, 46210, 46220, 46230, 46240, 46330, 46380, 46400, 46410, 46470, 46610, 46670, 46680, 46720, 46730, 46740, 46750, 46900, 
-46910, 46920, 46930);
+43350, 43410, 43420, 43440, 43450, 43570, 43590, 43600, 43610, 43730, 43770, 43820, 43830, 43850, 43900, 44130, 44140, 
+44150, 44180, 45040, 45100, 46040, 46080, 46090, 46100, 46140, 46150, 46180);
+var mhair7 = Array(35520, 46210, 46220, 46230, 46240, 46330, 46380, 46400, 46410, 46470, 46610, 46670, 46680, 46720, 46740, 46920, 46930);
 
 var fhair = Array(33140, 33160, 34000, 34010, 34030, 34040, 34050, 34060, 34110, 34120, 34130, 34170, 34180, 34200, 34210, 34230, 34240,
  34250, 34260, 34270, 34300, 34310, 34330, 34370, 34380, 34410, 34420, 34450, 34470, 34480, 34540, 34590, 34620, 34640, 34650, 34660, 34670,
@@ -75,17 +74,17 @@ var fhair3 = Array(37520, 37530, 37560, 37570, 37580, 37600, 37620, 37630, 37640
  37770, 37780, 37790, 37800, 37810, 37830, 37840, 37850, 37860, 37900, 37910, 37920, 37940, 37950, 37990, 38000, 38010, 38020, 38030, 38040,
  38050, 38060, 38070, 38080, 38100, 38110, 38130, 38140, 38150, 38180, 38240, 38250, 38260);
 var fhair4 = Array(38380, 38390, 38400, 38430, 38440, 38450, 38460, 38470, 38480, 38500, 38530, 38550, 38580, 38600, 38620, 38630, 38650, 
-38660, 38670, 38680, 38690, 38700, 38710, 38720, 38730, 38740, 38760, 38780, 38790, 38820, 38840, 38860, 38880, 38890, 38900, 38940, 
+38660, 38670, 38690, 38700, 38710, 38720, 38730, 38740, 38760, 38780, 38790, 38820, 38840, 38860, 38880, 38890, 38900, 38940, 
 39000, 39250, 39310, 39320, 39330, 39340, 39350, 39360, 39370, 39380, 39390, 39400, 39410);
-var fhair5 = Array(39430, 39440 ,40850, 40860 ,40870 ,40880 ,40900 ,40920 ,41080 ,41100 ,41110 ,41150 ,41170 ,41180 ,41200 ,41220 ,41340 ,
-41350 ,41360 ,41370 ,41380 ,41390 ,41410 ,41420 ,41440 ,41460 ,41470 ,41480 ,41490 ,41510 ,41560 ,41570 ,41580 ,41610 ,41620 ,41630 ,41640 ,
-41650 ,41660 ,41670 ,41680 ,41690 ,41700 ,41710 ,41720 ,41730 ,41760 ,41770 ,41780 ,41790);
-var fhair6 = Array(39420, 41800, 41810, 41820, 41830, 41840, 41850, 41880, 41910, 41920, 41940, 41950, 41960, 41970, 41980, 41990, 42070, 42090, 
-42110, 42120, 42150, 43210, 43630, 43640, 43650, 43840, 43860, 43870, 43880, 44030, 44190, 44200, 44290, 44320, 44340, 44350, 44360, 44370, 
+var fhair5 = Array(39430, 39440 ,40850, 40860 ,40870 ,40880 ,40900 ,40920 ,41080 ,41100 ,41110 ,41150 ,41170 ,41180 ,41200 ,41220 ,
+41350 ,41360 ,41380 ,41390 ,41410 ,41420 ,41440 ,41460 ,41470 ,41480 ,41510 ,41560 ,41570 ,41580 ,41610 ,41620 ,41630 ,41640 ,
+41650 ,41660 ,41670 ,41680 ,41690 ,41710 ,41730 ,41760 ,41770 ,41780 ,41790);
+var fhair6 = Array(39420, 41800, 41810, 41820, 41830, 41840, 41880, 41910, 41940, 41950, 41970, 41980, 41990, 42070, 42090, 
+42110, 42120, 42150, 43630, 43640, 43650, 43840, 43860, 43870, 43880, 44030, 44190, 44320, 44340, 44350, 44360, 44370, 
 44380, 44390, 44410, 44420, 44430, 44440, 44450, 44460, 44530, 44600, 44650, 44780, 44790);
-var fhair7 = Array(38290, 44800, 44810, 44840, 44980, 47000, 47060, 47070, 47080, 47150, 47160, 47170, 47300, 47310, 47320, 47330, 47340, 47350, 
-47360, 47370, 47400, 47410, 47430, 47440, 47520, 48030, 48090, 48130, 48140, 48150, 48160, 48200, 48210, 48220, 48230, 48400, 48430, 48450, 
-48460, 48490, 48550, 48580, 48750, 48770, 48790, 48830, 48860, 48870, 48880, 48890, 48900, 48910, 48920, 48930);
+var fhair7 = Array(38290, 44800, 44810, 44840, 44980, 47000, 47060, 47150, 47160, 47170, 47310, 47320, 47330, 47340, 
+47360, 47370, 47400, 47410, 47430, 47440, 47520, 48030, 48090, 48130, 48140, 48150, 48160, 48200, 48210, 48230, 48400, 48430, 48450, 
+48460, 48490, 48580, 48750, 48770, 48790, 48830, 48860, 48870, 48880, 48890, 48910, 48920, 48930);
 
 var skin = Array(0, 1, 2, 3, 4, 5, 10, 11, 12);
 var hairnew = Array();
@@ -103,7 +102,7 @@ function action(mode, type, selection) {
     } else {
         status++;
         if (status == 0) 
-            cm.sendSimple("Hi, I'm Headward! Get your hairs and faces did! Woohooings!" + "\r\n#e#L0##i5150001##rHaircut#k#i5150001##l\r\n #L1##i5152001##rFace Surgery#k#i5152001#");
+            cm.sendSimple("Hi, I'm Headward! Get your hairs and faces did! Woohooings!\r\n#e#rHair/Eye Color will reverted back to Black#k" + "\r\n#e#L0##i5150001##rHaircut#k#i5150001##l\r\n #L1##i5152001##rFace Surgery#k#i5152001#");
         else if (status == 1) {
 			if (selection == 0) {
                          cm.sendSimple("You want to change your hairstyle? Which selection would you like?#b\r\n" + 
@@ -136,70 +135,84 @@ function action(mode, type, selection) {
                        hairnew = Array();
                    if (cm.getPlayer().getGender() == 0)
                        for(var i = 0; i < mhair.length; i++)
-                        hairnew.push(mhair[i] + parseInt(cm.getPlayer().getHair()% 10));
+                        //hairnew.push(mhair[i] + parseInt(cm.getPlayer().getHair()% 10));
+					    hairnew.push(mhair[i]);
                 if (cm.getPlayer().getGender() == 1)
                     for(var i = 0; i < fhair.length; i++)
-                        hairnew.push(fhair[i] + parseInt(cm.getPlayer().getHair() % 10));
+                       // hairnew.push(fhair[i] + parseInt(cm.getPlayer().getHair() % 10));
+						hairnew.push(fhair[i]);
                 cm.sendStyle("#eWant a new Hairstyle? If you have a #b#t5150001##k I'll change it for you!", hairnew);
                  } else if (selection == 1) {
 				beauty = 1;
                 hairnew = Array();
                 if (cm.getPlayer().getGender() == 0)
                     for(var i = 0; i < mhair2.length; i++)
-                        hairnew.push(mhair2[i] + parseInt(cm.getPlayer().getHair()% 10));
+                        //hairnew.push(mhair2[i] + parseInt(cm.getPlayer().getHair()% 10));
+						hairnew.push(mhair2[i]);
                 if (cm.getPlayer().getGender() == 1)
                     for(var i = 0; i < fhair2.length; i++)
-                        hairnew.push(fhair2[i] + parseInt(cm.getPlayer().getHair() % 10));
+                        //hairnew.push(fhair2[i] + parseInt(cm.getPlayer().getHair() % 10));
+						hairnew.push(fhair2[i]);
                 cm.sendStyle("#eWant a new Hairstyle? If you have a #b#t5150001##k I'll change it for you!", hairnew);
 			} else if (selection == 2) {
 				beauty = 1;
                 hairnew = Array();
                 if (cm.getPlayer().getGender() == 0)
                     for(var i = 0; i < mhair3.length; i++)
-                        hairnew.push(mhair3[i] + parseInt(cm.getPlayer().getHair()% 10));
+                        //hairnew.push(mhair3[i] + parseInt(cm.getPlayer().getHair()% 10));
+						hairnew.push(mhair3[i]);
                 if (cm.getPlayer().getGender() == 1)
                     for(var i = 0; i < fhair3.length; i++)
-                        hairnew.push(fhair3[i] + parseInt(cm.getPlayer().getHair() % 10));
+                        //hairnew.push(fhair3[i] + parseInt(cm.getPlayer().getHair() % 10));
+						hairnew.push(fhair3[i]);
                 cm.sendStyle("#eWant a new Hairstyle? If you have a #b#t5150001##k I'll change it for you!", hairnew);
             } else if (selection == 3) {
 				beauty = 1;
                 hairnew = Array();
                 if (cm.getPlayer().getGender() == 0)
                     for(var i = 0; i < mhair4.length; i++)
-                        hairnew.push(mhair4[i] + parseInt(cm.getPlayer().getHair()% 10));
+                        //hairnew.push(mhair4[i] + parseInt(cm.getPlayer().getHair()% 10));
+						 hairnew.push(mhair4[i]);
                 if (cm.getPlayer().getGender() == 1)
                     for(var i = 0; i < fhair4.length; i++)
-                        hairnew.push(fhair4[i] + parseInt(cm.getPlayer().getHair() % 10));
+                        //hairnew.push(fhair4[i] + parseInt(cm.getPlayer().getHair() % 10));
+						 hairnew.push(fhair4[i]);
                 cm.sendStyle("#eWant a new Hairstyle? If you have a #b#t5150001##k I'll change it for you!", hairnew);
             } else if (selection == 4) {
 				beauty = 1;
                 hairnew = Array();
                 if (cm.getPlayer().getGender() == 0)
                     for(var i = 0; i < mhair5.length; i++)
-                        hairnew.push(mhair5[i] + parseInt(cm.getPlayer().getHair()% 10));
+                        //hairnew.push(mhair5[i] + parseInt(cm.getPlayer().getHair()% 10));
+						hairnew.push(mhair5[i]);
                 if (cm.getPlayer().getGender() == 1)
                     for(var i = 0; i < fhair5.length; i++)
-                        hairnew.push(fhair5[i] + parseInt(cm.getPlayer().getHair() % 10));
+                        //hairnew.push(fhair5[i] + parseInt(cm.getPlayer().getHair() % 10));
+						hairnew.push(fhair5[i]);
                 cm.sendStyle("#eWant a new Hairstyle? If you have a #b#t5150001##k I'll change it for you!", hairnew);
             } else if (selection == 5) {
 				beauty = 1;
                 hairnew = Array();
                 if (cm.getPlayer().getGender() == 0)
                     for(var i = 0; i < mhair6.length; i++)
-                        hairnew.push(mhair6[i] + parseInt(cm.getPlayer().getHair()% 10));
+                        //hairnew.push(mhair6[i] + parseInt(cm.getPlayer().getHair()% 10));
+						hairnew.push(mhair6[i]);
                 if (cm.getPlayer().getGender() == 1)
                     for(var i = 0; i < fhair6.length; i++)
-                        hairnew.push(fhair6[i] + parseInt(cm.getPlayer().getHair() % 10));
+                        //hairnew.push(fhair6[i] + parseInt(cm.getPlayer().getHair() % 10));
+						hairnew.push(fhair6[i]);
                 cm.sendStyle("#eWant a new Hairstyle? If you have a #b#t5150001##k I'll change it for you!", hairnew);
             } else if (selection == 6) {
 				beauty = 1;
                 hairnew = Array();
                 if (cm.getPlayer().getGender() == 0)
                     for(var i = 0; i < mhair7.length; i++)
-                        hairnew.push(mhair7[i] + parseInt(cm.getPlayer().getHair()% 10));
+                        //hairnew.push(mhair7[i] + parseInt(cm.getPlayer().getHair()% 10));
+						hairnew.push(mhair7[i]);
                 if (cm.getPlayer().getGender() == 1)
                     for(var i = 0; i < fhair7.length; i++)
-                        hairnew.push(fhair7[i] + parseInt(cm.getPlayer().getHair() % 10));
+                        //hairnew.push(fhair7[i] + parseInt(cm.getPlayer().getHair() % 10));
+						hairnew.push(fhair7[i]);
                 cm.sendStyle("#eWant a new Hairstyle? If you have a #b#t5150001##k I'll change it for you!", hairnew);
 			} 
                     }   else if (status == 2 && beauty == 2) {
@@ -208,11 +221,13 @@ function action(mode, type, selection) {
                 facenew = Array();
                 if (cm.getPlayer().getGender() == 0) {
                     for(var i = 0; i < mface.length; i++)
-                        facenew.push(mface[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(mface[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(mface[i]);
                 }
                 if (cm.getPlayer().getGender() == 1) {
                     for(var i = 0; i < fface.length; i++)
-                        facenew.push(fface[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(fface[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(fface[i]);
                 }	
                 cm.sendStyle("#eWant Plastic Surgery? If you have a #b#t5152001##k I'll change it for you!", facenew);
 			} else if (selection == 1) {
@@ -220,11 +235,13 @@ function action(mode, type, selection) {
                 facenew = Array();
                 if (cm.getPlayer().getGender() == 0) {
                     for(var i = 0; i < mface2.length; i++)
-                        facenew.push(mface2[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(mface2[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(mface2[i]);
                 }
                 if (cm.getPlayer().getGender() == 1) {
                     for(var i = 0; i < fface2.length; i++)
-                        facenew.push(fface2[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(fface2[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(fface2[i]);
                 }	
                 cm.sendStyle("#eWant Plastic Surgery? If you have a #b#t5152001##k I'll change it for you!", facenew);
 			} else if (selection == 2) {
@@ -232,11 +249,13 @@ function action(mode, type, selection) {
                 facenew = Array();
                 if (cm.getPlayer().getGender() == 0) {
                     for(var i = 0; i < mface3.length; i++)
-                        facenew.push(mface3[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(mface3[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(mface3[i]);
                 }
                 if (cm.getPlayer().getGender() == 1) {
                     for(var i = 0; i < fface3.length; i++)
-                        facenew.push(fface3[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(fface3[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(fface3[i]);
                 }	
                 cm.sendStyle("#eWant Plastic Surgery? If you have a #b#t5152001##k I'll change it for you!", facenew);
 			} else if (selection == 3) {
@@ -244,11 +263,13 @@ function action(mode, type, selection) {
                 facenew = Array();
                 if (cm.getPlayer().getGender() == 0) {
                     for(var i = 0; i < mface4.length; i++)
-                        facenew.push(mface4[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(mface4[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(mface4[i]);
                 }
                 if (cm.getPlayer().getGender() == 1) {
                     for(var i = 0; i < fface4.length; i++)
-                        facenew.push(fface4[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(fface4[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(fface4[i]);
                 }	
                 cm.sendStyle("#eWant Plastic Surgery? If you have a #b#t5152001##k I'll change it for you!", facenew);
 			} else if (selection == 4) {
@@ -256,11 +277,13 @@ function action(mode, type, selection) {
                 facenew = Array();
                 if (cm.getPlayer().getGender() == 0) {
                     for(var i = 0; i < mface5.length; i++)
-                        facenew.push(mface5[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(mface5[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(mface5[i]);
                 }
                 if (cm.getPlayer().getGender() == 1) {
                     for(var i = 0; i < fface5.length; i++)
-                        facenew.push(fface5[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(fface5[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(fface5[i]);
                 }	
                 cm.sendStyle("#eWant Plastic Surgery? If you have a #b#t5152001##k I'll change it for you!", facenew);
 			} else if (selection == 5) {
@@ -268,11 +291,13 @@ function action(mode, type, selection) {
                 facenew = Array();
                 if (cm.getPlayer().getGender() == 0) {
                     for(var i = 0; i < mface6.length; i++)
-                        facenew.push(mface6[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(mface6[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(mface6[i]);
                 }
                 if (cm.getPlayer().getGender() == 1) {
                     for(var i = 0; i < fface6.length; i++)
-                        facenew.push(fface6[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(fface6[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(fface6[i]);
                 }	
                 cm.sendStyle("#eWant Plastic Surgery? If you have a #b#t5152001##k I'll change it for you!", facenew);
 			} else if (selection == 6) {
@@ -280,11 +305,13 @@ function action(mode, type, selection) {
                 facenew = Array();
                 if (cm.getPlayer().getGender() == 0) {
                     for(var i = 0; i < mface7.length; i++)
-                        facenew.push(mface7[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(mface7[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(mface7[i]);
                 }
                 if (cm.getPlayer().getGender() == 1) {
                     for(var i = 0; i < fface7.length; i++)
-                        facenew.push(fface7[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+                        //facenew.push(fface7[i] + parseInt(cm.getPlayer().getFace()% 1000 - (cm.getPlayer().getFace()% 100)));
+						facenew.push(fface7[i]);
                 }	
                 cm.sendStyle("#eWant Plastic Surgery? If you have a #b#t5152001##k I'll change it for you!", facenew);
                         }

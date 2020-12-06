@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class BossLogCommand extends Command {
     {
-        setDescription("Check your daily boss kills.");
+        setDescription("Check your daily/weekly boss kills.");
     }
 
     @Override
@@ -53,12 +53,13 @@ public class BossLogCommand extends Command {
         }
         for (MapleCharacter mapleCharacter : chars) {
             Map<String, String> bossMap = MapleExpeditionBossLog.getDailyBossEntries(mapleCharacter.getId(), player.gmLevel() <= 1 || params.length == 0);
-            if (bossMap != null && !bossMap.isEmpty()) {
+            bossMap.putAll(MapleExpeditionBossLog.getWeeklyBossEntries(mapleCharacter.getId(), player.gmLevel() <= 1 || params.length == 0));
+            if (!bossMap.isEmpty()) {
                 if (player.gmLevel() > 1)
                     player.message(mapleCharacter.getName() + "'s boss count for the day: ");
                 else
                     player.message("Your boss count for the day: ");
-                bossMap.forEach((k, v) -> player.message("You have killed " + k + ": " + v + " times."));
+                bossMap.forEach((k, v) -> player.message("You have killed " + k + ": " + v + "times.)"));
             }
         }
     }

@@ -128,6 +128,7 @@ public class MapleLifeFactory {
         }
 
         stats.setHp((long) MapleDataTool.getIntConvert("maxHP", monsterInfoData) * ((long) Rank.getMobRank(mid) + 1L));
+        stats.setFixedDamage(MapleDataTool.getIntConvert("fixedDamage", monsterInfoData, -1));
         //stats.setHp(MapleDataTool.getIntConvert("maxHP", monsterInfoData)); - Original Code
         stats.setFriendly(MapleDataTool.getIntConvert("damagedByMob", monsterInfoData, stats.isFriendly() ? 1 : 0) == 1);
         stats.setPADamage(MapleDataTool.getIntConvert("PADamage", monsterInfoData));

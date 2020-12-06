@@ -226,13 +226,58 @@ public class MapleMap {
     public int getWorld() {
         return world;
     }
-    
+
+    private void removeStuckPlayer(MapleCharacter chr) {
+        chrWLock.lock();
+        try {
+            if (chr != null) {
+                int id = -1;
+                try {
+                    id = chr.getId();
+                } catch (Exception e) {
+                    FilePrinter.printError(FilePrinter.EXCEPTION_CAUGHT, e, "Character id is not set");
+                }
+
+                FilePrinter.printError(FilePrinter.ACCOUNT_STUCK,"chr: " + id + " is stuck.. removing player from map: " + getId());
+                characters.remove(chr);
+
+                // not sure if this is even needed
+                if (id > 0) {
+                    MapleCharacter chrStore = this.getWorldServer().getPlayerStorage().getCharacterById(id);
+                    if (chrStore != null) { // The stuck player is exists in player storage, so lets check if they are same instance
+                        if (chr.equals(chrStore)) { // this player is completely stuck
+                            FilePrinter.printError(FilePrinter.ACCOUNT_STUCK, "Matching player found in playerStorage");
+                            if (chr.getClient() == null) { // not much we can do if the client is null
+                                this.getWorldServer().getPlayerStorage().removePlayer(id);
+                            }
+                        } else {
+                            if (!characters.contains(chrStore)) { // theres somehow a different instance of the player?
+                                if (chrStore.getClient() != null) {
+                                    if (chrStore.getMap().getId() == getId() && chrStore.getClient().getChannel() == getChannelServer().getId()) { // same map and channel but they arent in the map
+                                        FilePrinter.printError(FilePrinter.ACCOUNT_STUCK, "Adding player object to MapleMap");
+                                        characters.add(chrStore); // add the valid char to the map
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } finally {
+            chrWLock.unlock();
+        }
+    }
+
     public void broadcastMessage(MapleCharacter source, final byte[] packet) {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                if (chr != source) {
-                    chr.getClient().announce(packet);
+                if (chr != null && chr.getClient() != null) {
+                    if (chr != source) {
+                        chr.getClient().announce(packet);
+                    }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -244,8 +289,12 @@ public class MapleMap {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                if (chr != source && (chr.gmLevel() >= source.gmLevel())) {
-                    chr.getClient().announce(packet);
+                if (chr != null && chr.getClient() != null) {
+                    if (chr != source && (chr.gmLevel() >= source.gmLevel())) {
+                        chr.getClient().announce(packet);
+                    }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -430,11 +479,15 @@ public class MapleMap {
             mapobject.setObjectId(curOID);
             this.mapobjects.put(curOID, mapobject);
             for (MapleCharacter chr : characters) {
-                if (condition == null || condition.canSpawn(chr)) {
-                    if (chr.getPosition().distanceSq(mapobject.getPosition()) <= getRangedDistance()) {
-                        inRangeCharacters.add(chr);
-                        chr.addVisibleMapObject(mapobject);
+                if (chr != null && chr.getClient() != null) {
+                    if (condition == null || condition.canSpawn(chr)) {
+                        if (chr.getPosition().distanceSq(mapobject.getPosition()) <= getRangedDistance()) {
+                            inRangeCharacters.add(chr);
+                            chr.addVisibleMapObject(mapobject);
+                        }
                     }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -455,11 +508,15 @@ public class MapleMap {
             int curOID = getUsableOID();
             mapobject.setObjectId(curOID);
             for (MapleCharacter chr : characters) {
-                if (condition == null || condition.canSpawn(chr)) {
-                    if (chr.getPosition().distanceSq(mapobject.getPosition()) <= getRangedDistance()) {
-                        inRangeCharacters.add(chr);
-                        chr.addVisibleMapObject(mapobject);
+                if (chr != null && chr.getClient() != null) {
+                    if (condition == null || condition.canSpawn(chr)) {
+                        if (chr.getPosition().distanceSq(mapobject.getPosition()) <= getRangedDistance()) {
+                            inRangeCharacters.add(chr);
+                            chr.addVisibleMapObject(mapobject);
+                        }
                     }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -1082,9 +1139,13 @@ public class MapleMap {
         return count;
     }
     
-    public void pickItemDrop(byte[] pickupPacket, MapleMapItem mdrop) { // mdrop must be already locked and not-pickedup checked by now
-        broadcastMessage(pickupPacket, mdrop.getPosition());
-        
+public void pickItemDrop(byte[] pickupPacket, MapleMapItem mdrop) { // mdrop must be already locked and not-pickedup checked at this point
+        try {
+            broadcastMessage(pickupPacket, mdrop.getPosition());
+        } catch (Exception e) {
+
+        }
+
         droppedItemCount.decrementAndGet();
         this.removeMapObject(mdrop);
         mdrop.setPickedUp(true);
@@ -1196,7 +1257,8 @@ public class MapleMap {
             public void sendPackets(MapleClient c) {
                 mdrop.lockItem();
                 try {
-                    c.announce(MaplePacketCreator.dropItemFromMapObject(c.getPlayer(), mdrop, dropper.getPosition(), droppos, (byte) 1));
+                    if (c != null && c.getPlayer() != null && dropper != null && droppos != null)
+                        c.announce(MaplePacketCreator.dropItemFromMapObject(c.getPlayer(), mdrop, dropper.getPosition(), droppos, (byte) 1));
                 } finally {
                     mdrop.unlockItem();
                 }
@@ -1337,8 +1399,12 @@ public class MapleMap {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                if (box.contains(chr.getPosition())) {
-                    character.add(chr);
+                if (chr != null && chr.getClient() != null) {
+                    if (box.contains(chr.getPosition())) {
+                        character.add(chr);
+                    }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -2938,21 +3004,35 @@ public class MapleMap {
         broadcastMessage(source, packet, getRangedDistance(), rangedFrom);
     }
 
-    private void broadcastMessage(MapleCharacter source, final byte[] packet, double rangeSq, Point rangedFrom) {
+private void broadcastMessage(MapleCharacter source, final byte[] packet, double rangeSq, Point rangedFrom) {
         chrRLock.lock();
+        List<MapleCharacter> removeChars = new ArrayList<>();
         try {
             for (MapleCharacter chr : characters) {
-                if (chr != source) {
-                    if (rangeSq < Double.POSITIVE_INFINITY) {
-                        if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                try {
+                    if (chr != source) {
+                        if (rangeSq < Double.POSITIVE_INFINITY) {
+                            if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                                chr.getClient().announce(packet);
+                            }
+                        } else {
                             chr.getClient().announce(packet);
                         }
-                    } else {
-                        chr.getClient().announce(packet);
                     }
+                } catch (Throwable t) {
+                    removeChars.add(chr);
                 }
             }
         } finally {
+            boolean noneClientFound = false;
+            for (MapleCharacter removeChar : removeChars) {
+                characters.remove(removeChar);
+                noneClientFound = true;
+            }
+            if (noneClientFound) {
+                MapleMap newMap = getChannelServer().getMapFactory().resetMap(getId());
+                newMap.respawn();
+            }
             chrRLock.unlock();
         }
     }
@@ -2984,14 +3064,18 @@ public class MapleMap {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                if (chr != source) {
-                    if (rangeSq < Double.POSITIVE_INFINITY) {
-                        if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                if (chr != null && chr.getClient() != null) {
+                    if (chr != source) {
+                        if (rangeSq < Double.POSITIVE_INFINITY) {
+                            if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                                chr.getClient().announceBossHpBar(mm, bossHash, packet);
+                            }
+                        } else {
                             chr.getClient().announceBossHpBar(mm, bossHash, packet);
                         }
-                    } else {
-                        chr.getClient().announceBossHpBar(mm, bossHash, packet);
                     }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -3011,14 +3095,18 @@ public class MapleMap {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                final byte[] packet = MaplePacketCreator.dropItemFromMapObject(chr, mdrop, dropperPos, dropPos, mod);
-                
-                if (rangeSq < Double.POSITIVE_INFINITY) {
-                    if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                if (chr != null && chr.getClient() != null) {
+                    final byte[] packet = MaplePacketCreator.dropItemFromMapObject(chr, mdrop, dropperPos, dropPos, mod);
+
+                    if (rangeSq < Double.POSITIVE_INFINITY) {
+                        if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                            chr.announce(packet);
+                        }
+                    } else {
                         chr.announce(packet);
                     }
                 } else {
-                    chr.announce(packet);
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -3039,16 +3127,24 @@ public class MapleMap {
         try {
             if (gmBroadcast) {
                 for (MapleCharacter chr : characters) {
-                    if (chr.isGM()) {
-                        if (chr != source) {
-                            chr.announce(MaplePacketCreator.spawnPlayerMapObject(chr.getClient(), player, enteringField));
+                    if (chr != null && chr.getClient() != null) {
+                        if (chr.isGM()) {
+                            if (chr != source) {
+                                chr.announce(MaplePacketCreator.spawnPlayerMapObject(chr.getClient(), player, enteringField));
+                            }
                         }
+                    } else {
+                        removeStuckPlayer(chr);
                     }
                 }
             } else {
                 for (MapleCharacter chr : characters) {
-                    if (chr != source) {
-                        chr.announce(MaplePacketCreator.spawnPlayerMapObject(chr.getClient(), player, enteringField));
+                    if (chr != null && chr.getClient() != null) {
+                        if (chr != source) {
+                            chr.announce(MaplePacketCreator.spawnPlayerMapObject(chr.getClient(), player, enteringField));
+                        }
+                    } else {
+                        removeStuckPlayer(chr);
                     }
                 }
             }
@@ -3061,8 +3157,12 @@ public class MapleMap {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                if (chr != source) {
-                    chr.announce(MaplePacketCreator.updateCharLook(chr.getClient(), player));
+                if (chr != null && chr.getClient() != null) {
+                    if (chr != source) {
+                        chr.announce(MaplePacketCreator.updateCharLook(chr.getClient(), player));
+                    }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {
@@ -3892,18 +3992,21 @@ public class MapleMap {
         broadcastGMMessage(repeatToSource ? null : source, packet, Double.POSITIVE_INFINITY, source.getPosition());
     }
 
-    private void broadcastGMMessage(MapleCharacter source, final byte[] packet, double rangeSq, Point rangedFrom) {
+	private void broadcastGMMessage(MapleCharacter source, final byte[] packet, double rangeSq, Point rangedFrom) {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                if (chr != source && chr.isGM()) {
-                    if (rangeSq < Double.POSITIVE_INFINITY) {
-                        if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                try {
+                    if (chr != source && chr.isGM()) {
+                        if (rangeSq < Double.POSITIVE_INFINITY) {
+                            if (rangedFrom.distanceSq(chr.getPosition()) <= rangeSq) {
+                                chr.getClient().announce(packet);
+                            }
+                        } else {
                             chr.getClient().announce(packet);
                         }
-                    } else {
-                        chr.getClient().announce(packet);
                     }
+                } catch (Exception e) {
                 }
             }
         } finally {
@@ -3915,8 +4018,12 @@ public class MapleMap {
         chrRLock.lock();
         try {
             for (MapleCharacter chr : characters) {
-                if (chr != source && !chr.isGM()) {
-                    chr.getClient().announce(packet);
+                if (chr != null && chr.getClient() != null) {
+                    if (chr != source && !chr.isGM()) {
+                        chr.getClient().announce(packet);
+                    }
+                } else {
+                    removeStuckPlayer(chr);
                 }
             }
         } finally {

@@ -280,7 +280,7 @@ public class MaplePlayerShop extends AbstractMapleMapObject {
                         
                         if (canBuy(c, newItem)) {
                             c.getPlayer().gainMeso(-price, false);
-                            price -= MapleTrade.getFee(price);  // thanks BHB for pointing out trade fees not applying here
+                            price -= MapleTrade.getMerchantFee(price);  // thanks BHB for pointing out trade fees not applying here
                             owner.gainMeso(price, true);
                             
                             SoldItem soldItem = new SoldItem(c.getPlayer().getName(), pItem.getItem().getItemId(), quantity, price);

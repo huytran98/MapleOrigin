@@ -39,8 +39,8 @@ public class DCAllCommand extends Command {
         MapleCharacter player = c.getPlayer();
         for (World world : Server.getInstance().getWorlds()) {
             for (MapleCharacter chr : world.getPlayerStorage().getAllCharacters()) {
-                if (!chr.isGM()) {
-                    chr.getClient().disconnect(false, false);
+                if (chr != null && chr.getClient() != null && !chr.isGM()) {
+                    chr.getClient().forceDisconnect();
                 }
             }
         }

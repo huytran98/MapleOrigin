@@ -591,16 +591,16 @@ public class World {
     }
     
     public void removePlayer(MapleCharacter chr) {
-        Channel cserv = chr.getClient().getChannelServer();
-        
-        if(cserv != null) {
-            if(!cserv.removePlayer(chr)) {
-                // oy the player is not where they should be, find this mf
+        Channel cserv = null;
+        if (chr.getClient() != null)
+            cserv = chr.getClient().getChannelServer();
 
-                for(Channel ch : getChannels()) {
-                    if(ch.removePlayer(chr)) {
-                        break;
-                    }
+        if (cserv == null || !cserv.removePlayer(chr)) {
+            // oy the player is not where they should be, find this mf
+
+            for (Channel ch : getChannels()) {
+                if (ch.removePlayer(chr)) {
+                    break;
                 }
             }
         }
@@ -768,7 +768,7 @@ public class World {
                 continue;
             }
             chr = getPlayerStorage().getCharacterById(i);
-            if (chr != null) {
+            if (chr != null && chr.getClient() != null) {
                 chr.getClient().announce(packet);
             }
         }
@@ -1090,7 +1090,7 @@ public class World {
         for (MaplePartyCharacter partychar : party.getMembers()) {
             if (!(partychar.getName().equals(namefrom))) {
                 MapleCharacter chr = getPlayerStorage().getCharacterByName(partychar.getName());
-                if (chr != null) {
+                if (chr != null && chr.getClient() != null) {
                     chr.getClient().announce(MaplePacketCreator.multiChat(namefrom, chattext, 1));
                 }
             }
@@ -1101,7 +1101,7 @@ public class World {
         PlayerStorage playerStorage = getPlayerStorage();
         for (int characterId : recipientCharacterIds) {
             MapleCharacter chr = playerStorage.getCharacterById(characterId);
-            if (chr != null) {
+            if (chr != null && chr.getClient() != null) {
                 if (chr.getBuddylist().containsVisible(cidFrom)) {
                     chr.getClient().announce(MaplePacketCreator.multiChat(nameFrom, chattext, 0));
                 }
@@ -1188,7 +1188,7 @@ public class World {
         for (MapleMessengerCharacter messengerchar : messenger.getMembers()) {
             if (!(messengerchar.getName().equals(namefrom))) {
                 MapleCharacter chr = getPlayerStorage().getCharacterByName(messengerchar.getName());
-                if (chr != null) {
+                if (chr != null && chr.getClient() != null) {
                     chr.getClient().announce(MaplePacketCreator.messengerChat(chattext));
                     if (to1.equals("")){
                     	to1 = messengerchar.getName();
@@ -1264,7 +1264,8 @@ public class World {
     }
 
     public boolean isConnected(String charName) {
-        return getPlayerStorage().getCharacterByName(charName) != null;
+        MapleCharacter chr = getPlayerStorage().getCharacterByName(charName);
+        return chr != null && chr.getClient() != null;
     }
 
     public void whisper(String sender, String target, int channel, String message) {
@@ -1322,7 +1323,7 @@ public class World {
         PlayerStorage playerStorage = getPlayerStorage();
         for (int buddy : buddies) {
             MapleCharacter chr = playerStorage.getCharacterById(buddy);
-            if (chr != null) {
+            if (chr != null && chr.getClient() != null) {
                 BuddylistEntry ble = chr.getBuddylist().get(characterId);
                 if (ble != null && ble.isVisible()) {
                     int mcChannel;

@@ -773,6 +773,8 @@ public class MapleMonster extends AbstractLoadedMapleLife {
             Integer expBonus = attacker.getBuffedValue(MapleBuffStat.EXP_INCREASE);
             if (expBonus != null) {     // exp increase player buff found thanks to HighKey21
                 personalExp += expBonus;
+            } else {
+                expBonus = 0;
             }
 
             int _personalExp = expValueToInteger(personalExp); // assuming no negative xp here
@@ -788,7 +790,11 @@ public class MapleMonster extends AbstractLoadedMapleLife {
             int _partyExp = expValueToInteger(partyExp);
             
             attacker.gainExp(_personalExp, _partyExp, true, false, white);
-            attacker.increaseEquipExp(_personalExp);
+            if (YamlConfig.config.server.EQUIP_EXP_RATE > 0) {
+                attacker.increaseEquipExp(expValueToInteger(YamlConfig.config.server.EQUIP_EXP_RATE * ((double) (personalExp - expBonus) / attacker.getExpRate())));
+            } else {
+                attacker.increaseEquipExp(_personalExp);
+            }
             attacker.raiseQuestMobCount(getId());
         }
     }

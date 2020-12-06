@@ -55,4 +55,5 @@ public final class ItemPickupHandler extends AbstractMaplePacketHandler {
         
         chr.pickupItem(ob);
     }
+
 }

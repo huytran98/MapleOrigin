@@ -140,7 +140,8 @@ public class ServerConfig {
     public boolean BLOCK_GENERATE_CASH_ITEM;
     public boolean USE_WHOLE_SERVER_RANKING;
 
-    public double EQUIP_EXP_RATE;
+    public int EQUIP_EXP_RATE;
+    public double EQUIP_EXP_MODIFIER;
     public double PQ_BONUS_EXP_RATE;
 
     public byte EXP_SPLIT_MOB_INTERVAL;

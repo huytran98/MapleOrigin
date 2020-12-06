@@ -24,6 +24,11 @@ var items = [
       { id: 5030004, cost: 15, expiration: 7 }, // cashier teddy bear 7 day
       { id: 5030008, cost: 15, expiration: 7 }, // robot stand 7 day
       { id: 5030012, cost: 15, expiration: 7 }, // tiki torch store 7 day
+	  { id: 5050000, cost: 25 }, // AP Reset
+	  { id: 5050001, cost: 5 }, // SP(1) Reset
+	  { id: 5050002, cost: 10 }, // SP(2) Reset
+	  { id: 5050003, cost: 15 }, // SP(3) Reset
+	  { id: 5050004, cost: 25 }, // SP(40 Reset
       { id: 2043001, cost: 10 }, // One-Handed Sword for ATT 60%
       { id: 2043101, cost: 10 }, // One-Handed Axe for ATT 60%
       { id: 2043201, cost: 10 }, // One-Handed BW for ATT 60%

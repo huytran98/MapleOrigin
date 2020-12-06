@@ -40,6 +40,7 @@ public class MapleMonsterStats {
     public boolean changeable;
     public int exp, mp, level, PADamage, PDDamage, MADamage, MDDamage, dropPeriod, cp, buffToGive = -1, removeAfter;
     public long hp;
+    public int fixedDamage;
     public boolean boss, undead, ffaLoot, isExplosiveReward, firstAttack, removeOnMiss;
     public String name;
     public Map<String, Integer> animationTimes = new HashMap<String, Integer>();
@@ -76,6 +77,14 @@ public class MapleMonsterStats {
 
     public void setHp(long hp) {
         this.hp = hp;
+    }
+
+    public long getFixedDamage() {
+        return fixedDamage;
+    }
+
+    public void setFixedDamage(long hp) {
+        this.fixedDamage = fixedDamage;
     }
 
     public int getMp() {

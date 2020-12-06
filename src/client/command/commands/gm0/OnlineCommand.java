@@ -41,7 +41,8 @@ public class OnlineCommand extends Command {
             player.yellowMessage("Players in Channel " + ch.getId() + ":");
             for (MapleCharacter chr : ch.getPlayerStorage().getAllCharacters()) {
                 if (!chr.isGM()) {
-                    player.message(" >> " + MapleCharacter.makeMapleReadable(chr.getName()) + " is at " + chr.getMap().getMapName() + ".");
+                    if (chr.getName() != null && chr.getMap() != null)
+                        player.message(" >> " + MapleCharacter.makeMapleReadable(chr.getName()) + " is at " + chr.getMap().getMapName() + ".");
                 }
             }
         }

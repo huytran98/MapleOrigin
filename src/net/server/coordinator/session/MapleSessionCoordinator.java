@@ -541,7 +541,7 @@ public class MapleSessionCoordinator {
         }
         
         if (immediately != null) {
-            session.close(immediately);
+            session.closeNow();
         }
         
         // session.removeAttribute(MapleClient.CLIENT_REMOTE_ADDRESS); No real need for removing String property on closed sessions

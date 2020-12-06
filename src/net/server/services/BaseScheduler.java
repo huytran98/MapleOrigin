@@ -123,8 +123,12 @@ public abstract class BaseScheduler {
             Pair<Runnable, Long> r = rmd.getValue();
 
             if(r.getRight() < timeNow) {
-                r.getLeft().run();  // runs the scheduled action
-                toRemove.add(rmd.getKey());
+                try {
+                    r.getLeft().run();  // runs the scheduled action
+                    toRemove.add(rmd.getKey());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         

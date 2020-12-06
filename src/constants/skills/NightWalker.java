@@ -37,6 +37,7 @@ public class NightWalker {
     public static final int HASTE = 14101003;
     public static final int POISON_BOMB = 14111006;
     public static final int SHADOW_PARTNER = 14111000;
+    public static final int TRIPLE_THROW = 14111005;
     public static final int SHADOW_WEB = 14111001;
     public static final int VANISH = 14100005;
     public static final int FLASH_JUMP = 14101004;

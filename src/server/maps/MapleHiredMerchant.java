@@ -265,12 +265,11 @@ public class MapleHiredMerchant extends AbstractMapleMapObject {
             }
             
             MapleKarmaManipulator.toggleKarmaFlagToUntradeable(newItem);
-            
-            int price = (int) Math.min((float) pItem.getPrice() * quantity, Integer.MAX_VALUE);
+            int price = Math.min(pItem.getPrice() * quantity, Integer.MAX_VALUE);
             if (c.getPlayer().getMeso() >= price) {
                 if (canBuy(c, newItem)) {
                     c.getPlayer().gainMeso(-price, false);
-                    price -= MapleTrade.getFee(price);  // thanks BHB for pointing out trade fees not applying here
+                    price -= MapleTrade.getMerchantFee(price);  // thanks BHB for pointing out trade fees not applying here
                     
                     synchronized (sold) {
                         sold.add(new SoldItem(c.getPlayer().getName(), pItem.getItem().getItemId(), newItem.getQuantity(), price));

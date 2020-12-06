@@ -185,4 +185,5 @@ public final class MoveLifeHandler extends AbstractMovementPacketHandler {
     private static boolean inRangeInclusive(Byte pVal, Integer pMin, Integer pMax) {
         return !(pVal < pMin) || (pVal > pMax);
     }
+
 }

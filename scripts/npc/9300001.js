@@ -12,7 +12,7 @@ function start() {
     if (cm.getPlayer().getLevel() >= 250) {
         cm.sendSimple("I see you've reached 250 ! What a remarkable milestone, now that you're level 250 you have the ability to trade jobs within your job tree!\r\n\#L1# Switch Job #l\r\n\#L2# Buy Skill Points #l\r\n");
     } else {
-        cm.sendOk("Job change is available for those who have achieved level 250!");
+        cm.sendOk("Job changing is available for those who have achieved level 250!");
         cm.dispose();
     }
 }
@@ -33,7 +33,7 @@ function action(mode, type, selection) {
             if (selection == 1) {
                 stage = 1;
                 if (cm.haveItem(leaf, 250)) {
-                    if (cm.getPlayer().getLevel() >= 251) {
+                    if (cm.getPlayer().getLevel() >= 250) {
                         cm.sendSimple("Which Job would you like to switch to?\r\n\#L1# Hero #l\r\n\#L2# Paladin #l\r\n\#L3# Dark Knight #l\r\n#L4# Fire Mage #l\r\n\#L5# Ice Mage #l\r\n\#L6# Bishop #l\r\n#L7# Bow Master #l\r\n\#L8# Crossbow Master #l\r\n#L9# Nightlord #l\r\n\#L10# Shadower #l\r\n#L11# Buccaneer #l\r\n\#L12# Corsair #l\r\n");
                     } else {
 						var jobText = "Which Sub-Job would you like to switch to?\r\n";
@@ -92,6 +92,7 @@ function action(mode, type, selection) {
         } else if (status == 2) {
             if (stage == 1) {
                 cm.gainItem(leaf, -250);
+				cm.resetSP();
                 cm.changeJobById(jobs[selection]);
                 cm.dispose();
             }

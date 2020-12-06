@@ -17,7 +17,7 @@
         <int name="eva" value="95"/>
         <int name="pushed" value="1800"/>
         <float name="fs" value="10.0"/>
-        <int name="exp" value="343750"/>
+        <int name="exp" value="500000"/>
         <int name="category" value="1"/>
         <string name="mobType" value="1N"/>
         <imgdir name="attack">

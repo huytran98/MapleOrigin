@@ -50,4 +50,5 @@ public final class MovePetHandler extends AbstractMovementPacketHandler {
         player.getPet(slot).updatePosition(res);
         player.getMap().broadcastMessage(player, MaplePacketCreator.movePet(player.getId(), petId, slot, res), false);
     }
+
 }

@@ -295,6 +295,7 @@ public class CommandsExecutor {
         addCommand("loot", 2, LootCommand.class);
         addCommand("awardToMap", 2, AwardToMapCommand.class);
         addCommand("spreset", 2, SPReset.class);
+        addCommand("seducemap", 2, SeduceMapCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -325,7 +326,7 @@ public class CommandsExecutor {
         addCommand("ignored", 3, IgnoredCommand.class);
         addCommand("pos", 3, PosCommand.class);
         addCommand("togglecoupon", 3, ToggleCouponCommand.class);
-        addCommand("togglewhitechat", 3, ChatCommand.class);
+        addCommand(new String[] {"togglewhitechat", "twc", "chatcolor"}, 3, ChatCommand.class);
         addCommand("fame", 3, FameCommand.class);
         addCommand("givenx", 3, GiveNxCommand.class);
         addCommand("givevp", 3, GiveVpCommand.class);
@@ -346,6 +347,7 @@ public class CommandsExecutor {
         addCommand("startmapevent", 3, StartMapEventCommand.class);
         addCommand("stopmapevent", 3, StopMapEventCommand.class);
         addCommand("online2", 3, OnlineTwoCommand.class);
+        addCommand(new String[]{"rmstuck", "removestuck"}, 3, RemoveStuckCommand.class);
         addCommand("ban", 3, BanCommand.class);
         addCommand("unban", 3, UnBanCommand.class);
         addCommand("healmap", 3, HealMapCommand.class);

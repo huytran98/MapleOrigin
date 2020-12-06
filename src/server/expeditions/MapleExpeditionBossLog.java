@@ -296,15 +296,25 @@ public class MapleExpeditionBossLog {
     }
 
     public static Map<String, String> getDailyBossEntries(int cid, boolean showZeros) {
+        return getBossEntries(cid, showZeros, false);
+    }
+
+
+    public static Map<String, String> getWeeklyBossEntries(int cid, boolean showZeros) {
+        return getBossEntries(cid, showZeros, true);
+    }
+
+    public static Map<String, String> getBossEntries(int cid, boolean showZeros, boolean weekly) {
 
         Map<String,String> dailyBossLog = new HashMap<>();
         // initialize all to 0
         for (BossLogEntry e : BossLogEntry.values()) {
-            dailyBossLog.put(e.name(), "0/" + e.entries + " (failed: 0)");
+            if ((weekly && e.week) || (!weekly && !e.week))
+                dailyBossLog.put(e.name(), "0/" + e.entries + " (failed: 0 ");
         }
 
         try (Connection con = DatabaseConnection.getConnection()) {
-            try (PreparedStatement ps = con.prepareStatement("SELECT bosstype, completed FROM bosslog_daily WHERE characterid = ?" )) {
+            try (PreparedStatement ps = con.prepareStatement("SELECT bosstype, completed FROM bosslog_" + (weekly ? "weekly" : "daily") + " WHERE characterid = ?" )) {
                 ps.setInt(1, cid);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {

@@ -10,10 +10,10 @@ importPackage(Packages.client.inventory);
 var status = 0;
 var selectedItem;
 
-var commonChairs = [3010000, 3010525, 3010001, 3010002, 3010003, 3010003, 3010009, 3010013, 3010014, 3010018, 3010022, 3010014, 3010045, 3010060, 3010062, 3010067, 3010116, 3010046, 3010047];
-var uncommonChairs = [3010100, 3010069, 3010071, 3010072, 3010095, 3010106, 3010111, 3012011, 3012011, 3010026, 3010053, 3010059, 3010087, 3010090, 3010091, 3010117, 3010118, 3010125, 3010153, 3010191, 3010585]; 
-var rareChairs = [3010085, 3010156, 3010049, 3010050, 3010054, 3010058, 3010099, 3012008, 3010130, 3010139, 3010219, 3010256, 3010299, 3010491, 3010490, 3010599, 3010615, 3010703, 3010798, 3012006, 3012016, 3013000];
-var urareChairs = [3015168, 3010512, 3018000, 3018001, 3018002, 3018004, 3018006, 3019095, 3019222, 3010523, 3010079];
+var commonChairs = [3010085, 3010156, 3010049, 3010050, 3010054, 3010058, 3010099, 3012008, 3010130, 3010139, 3010219, 3010256, 3010299, 3010491, 3010490, 3010599, 3010615, 3010703, 3010798, 3012006, 3012016, 3013000];
+var uncommonChairs = [3015229, 3010766, 3015228, 3015314, 3015416, 3015423, 3018002, 3018004, 3018006, 3019095, 3015425, 3015500, 3015628, 3015639, 3015640, 3015641, 3015759, 3015818, 3015962, 3016405, 3016406]; 
+var rareChairs = [3016407, 3015035, 3015000, 3010754, 3018361, 3019207, 3019210, 3019223, 3019864, 3019890, 3019891, 3010752, 3010164, 3010574, 3010609, 3010634, 3010721, 3010726, 3010728, 3010743, 3010840, 3015089];
+var urareChairs = [3015091, 3015306, 3019905, 3019904, 3019903, 3019902, 3015305, 3015279, 3015264, 3015241, 3015175, 3015092, 3010661, 3019859, 3015228, 3013003, 3013004];
 
 var relaunchItems = [
     {id: 1142647 }, // origin medal
@@ -51,7 +51,7 @@ function action(mode, type, selection) {
 			"#L1#Buy #r1 #b#e#z2049117##n#k for #r450mil #b#eMesos#n#k#l\r\n" +
 			"#L2#Buy #r5,000 #b#eNX#n#k for #r5mil #b#eMesos#n#k#l\r\n" +
 			"#L11#Buy #r100k #b#eNX#n#k for #r100mil #b#eMesos#n#k#l\r\n" +
-			"#L3#Buy a #b#erandom chair#n#k for #r2.5mil #b#eMesos#n#k#l\r\n" +
+			"#L3#Buy a #b#erandom chair#n#k for #r10mil #b#eMesos#n#k#l\r\n" +
 			"#L4#Buy #r1 #b#e#z5072000##n#k for #r1mil #b#eMesos#n#k#l\r\n" +
 			"#L5#Trade #r10 #b#e#z5072000##n#k for #r1 #b#e#z5076000##n#k#l\r\n" +
 			"#L12#Trade #r100 #b#e#z5072000##n#k for #r10 #b#e#z5076000##n#k#l\r\n" +
@@ -70,7 +70,7 @@ function action(mode, type, selection) {
 			} else if (selection == 11) {
 			    cm.sendYesNo("Are you sure you want to buy #r100,000 #b#eNX#n#k for #r100mil #b#eMesos#n#k?")
 			} else if (selection == 3) {
-			    cm.sendYesNo("Are you sure you want to buy a #b#erandom chair#n#k for #r2.5mil #b#eMesos#n#k?")
+			    cm.sendYesNo("Are you sure you want to buy a #b#erandom chair#n#k for #r10mil #b#eMesos#n#k?")
             } else if (selection == 4) {
 			    cm.sendYesNo("Are you sure you want to buy #r1 #b#e#z5072000##n#k for #r1mil #b#eMesos#n#k?")
             } else if (selection == 5) {
@@ -125,7 +125,7 @@ function action(mode, type, selection) {
 					cm.logLeaf("100k NX");
                 }
 			} else if (selectedItem == 3) {
-			    if (cm.getMeso() < 2500000) {
+			    if (cm.getMeso() < 10000000) {
                     cm.sendOk("Sorry, you do not have enough #b#eMesos#n#k to make this purchase.");
                 } else if (cm.getPlayer().getInventory(MapleInventoryType.SETUP).isFull(0)) {
                     cm.sendOk("Your inventory is full! Please make room and try again.");
@@ -148,7 +148,7 @@ function action(mode, type, selection) {
 					}
 					
 					if (item != -1) {	
-						cm.gainMeso(-2500000);
+						cm.gainMeso(-10000000);
 						cm.gainItem(item, 1);
 						cm.sendOk("Congratulations!#n#k You have obtained " + rarity + " chair!\r\n#e#b#v" + item + "# #z" + item + "#");
 						cm.logLeaf("Chair ID: " + item);
